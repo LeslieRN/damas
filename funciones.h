@@ -12,36 +12,71 @@
 typedef struct
 {
     char name[100];
+    char color[6];
     int pawnQuantity;
-    char *playQuantity;
-    char *color;
+    int win;
+    int quantityGames;
+    int tie;
+    char king;
+    char pawn;
 } player;
 
-enum letterKey
+typedef struct
 {
-    a = 1,
-    b = 2,
-    c = 3,
-    d = 4,
-    e = 5,
-    f = 6,
-    g = 7,
-    h = 8
-};
+    int row;
+    int column;
+    char value;
+} boardPositions;
+
+typedef struct
+{
+    char name[150];
+    char moves[500];
+} gameHistory;
+
 char **boardSpace();
-char **fillBoard(char **);
+char **fillBoard(char **, player *);
+boardPositions *secondBoard();
 void displayBoard(char **);
 player *fillPlayerData();
-char **play(player *, int, char **);
-char **movementPawn(player *, int, char **, char, int, char, int);
-char **movementLeft(player *, int, char **, int, int, int, int);
+void showPositions(boardPositions *);
+int mainMenu();
+
 int letterToPosition(char);
-void checkIfLegalMovement(char **, char **, char **);
-int checkIfDiagonal(char *, char *, char **, int *, int *);
-int moveDown(int, int, char *, char *, char ***);
-int moveUp(int, int, char *, char *, char ***);
+char positionToLetter(int);
+void checkIfLegalMovement(char **, char **, boardPositions *, char **boardPlay, int, player *);
+int checkOverflow(boardPositions *, char *);
+int coordinates(char *, char *, char **, int *, int *, player *);
+char *possibleMoves(char *, char **);
+char *possibleForceMove(int, player *, char **);
+int move(int, int, char *, char *, char ***, player *);
+//void checkLastDiag(char *, char **);
 //int determineDiagonal(char *, char *);
 int checkLastPositionEmpty(char *, char **);
-int checkIfCrox(char *, char *);
+int checkIfForceMove(int, player *, char *, char **);
+int checkIfPossibleMove(char *, char *, char **);
+//int checkIfCrox(char *, char *);
+//void forceMovement(char *, int, player *, char **);
+int isKing(char **, char *);
+int isPawn(char **, char *);
+int askForTable();
+//char *checkDiagDown(char *, char **, int, int);
+//char *checkDiagUp(char *, char **, int, int);
+//int checkRightDown(char *, char **, int, int);
+//void showPossibleMoves(char **);
+void changePlayer(int *, int *);
+void returnMovement(char *, int, int);
+char changeNumbertoLetter(char);
+int determineWinner(player **);
+//int chec
+/*FILE FUNCTIONS*/
+FILE *open_file(char *, char *);
+void close_file(FILE *);
+void show_file_data(char *);
+void show_history_data(char *);
+void printStruct(FILE *fout, player temp);
+int quantity_of_players(char *file_name);
+void insert_data(char *file_name, player *);
+void insert_Moves(char *file_name, gameHistory);
 
 #endif /* !FUNCIONES_H_ */

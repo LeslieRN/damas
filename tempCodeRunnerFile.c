@@ -1,1 +1,1 @@
-correctMove
+determineWinner
