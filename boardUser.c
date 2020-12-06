@@ -5,7 +5,9 @@
 #include <math.h>
 
 /**
- * Funtion that set the memory space for the board
+ * Name: boardSpace
+ * Funtion: reservar el espacio en memoria para la tablar
+ * return: (char**) espcio reservador
 */
 char **boardSpace()
 {
@@ -17,8 +19,11 @@ char **boardSpace()
 
     return pointerBoard;
 }
+
 /**
- * This funtions fill each line of the board
+ * Name: fillBoard
+ * Funtion: llenar la tabla con las repectivas posiciones de los peones
+ * return: (char**) tabla con las piezas
 */
 char **fillBoard(char **pointerBoard, player *playerP)
 {
@@ -32,11 +37,11 @@ char **fillBoard(char **pointerBoard, player *playerP)
             {
                 if (i < 3)
                 {
-                    symbolsBoard = playerP[0].pawn;
+                    symbolsBoard = playerP[1].pawn;
                 }
                 else if (i > 4)
                 {
-                    symbolsBoard = playerP[1].pawn;
+                    symbolsBoard = playerP[0].pawn;
                 }
                 else
                 {
@@ -53,6 +58,12 @@ char **fillBoard(char **pointerBoard, player *playerP)
     return pointerBoard;
 }
 
+/**
+ * Name: secondBoard
+ * Funtion: llenar una tabla secodaria con las repectivas casillas blancas y negras
+ *          El objetivo de esta es para verificar los movimientos validos
+ * return: (boardPositions*) tipo estructura boardPositions
+*/
 boardPositions *secondBoard()
 {
     boardPositions *position = (boardPositions *)malloc(sizeof(boardPositions) * 64);
@@ -80,6 +91,11 @@ boardPositions *secondBoard()
     return position;
 }
 
+/**
+ * Name: displayBoard
+ * Funtion: mostrar la tabla
+ * return: (sin retorno)
+*/
 void displayBoard(char **pointerBoard)
 {
     for (int i = 0; i < 8; i++)
@@ -95,6 +111,12 @@ void displayBoard(char **pointerBoard)
     printf("   a  b  c  d  e  f  g  h \n");
     return;
 }
+
+/**
+ * Name: fillPlayerData
+ * Funtion: inserta la informacion del usuario en la estructura de jugador
+ * return: (player)
+*/
 
 player *fillPlayerData()
 {
@@ -116,9 +138,9 @@ player *fillPlayerData()
     strcpy(p1[0].color, "Black");
     strcpy(p1[1].color, "White");
 
-    p1[0].king = 'K';
-    p1[1].king = 'k';
-    p1[0].pawn = 'P';
-    p1[1].pawn = 'p';
+    p1[0].king = 'k';
+    p1[1].king = 'K';
+    p1[0].pawn = 'p';
+    p1[1].pawn = 'P';
     return p1;
 }

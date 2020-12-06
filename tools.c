@@ -3,7 +3,13 @@
 #include "funciones.h"
 #include <string.h>
 #include <math.h>
-char changeNumbertoLetter(char columnNumber)
+
+/**
+ * Name: changeNumbertoLetter
+ * Funtion: cambia el numero de columna a letras (a,b,c,d,e,f,g,h)
+ * return: (char) retorna el numero cambiado a letra
+*/
+/*char changeNumbertoLetter(char columnNumber)
 {
     char *letters = {"abcdefgh"};
     for (int i = 0; i < 8; i++)
@@ -13,20 +19,23 @@ char changeNumbertoLetter(char columnNumber)
             return letters[i];
         }
     }
-}
+}*/
 
-int isKing(char **board, char *position)
+/**
+ * Name: isKing
+ * Funtion: verifica si una pieza es reyna(rey)
+ * return: (int) retorna 1 si es rey o 0 si no lo es
+*/
+int isKing(char position)
 {
-    int row = abs((position[1] - '0') - 8);
-    int column = letterToPosition(position[0]) - 1;
-    if ((*(*board + row) + column) == 'K' || (*(*board + row) + column) == 'k')
+    if (position == 'k' || position == 'K')
     {
-        printf("I'm a king\n");
         return 1;
     }
     return 0;
 }
 
+/*
 int isPawn(char **board, char *position)
 {
     int row = abs((position[1] - '0') - 8);
@@ -37,9 +46,13 @@ int isPawn(char **board, char *position)
         return 1;
     }
     return 0;
-}
-
-void changePlayer(int *turn, int *numPlays)
+}*/
+/**
+ * Name: changePlayer
+ * Funtion: cambia el turno del jugador. Del jugador 0 a 1 y, del jugador 1 al 0
+ * return: (sin retorno) los elemntos son pasados por referencia
+*/
+void changePlayer(int *turn)
 {
     if (*turn == 0)
     {
@@ -49,10 +62,14 @@ void changePlayer(int *turn, int *numPlays)
     {
         *turn = 0;
     }
-    //++(*numPlays);
     return;
 }
 
+/**
+ * Name: letterToPosition
+ * Funtion: cambia la letra de la columna a numero
+ * return: (int) retorna el numero correspodiente de la posicion de la letra
+*/
 int letterToPosition(char letterPlay)
 {
     char *letters = {"abcdefgh"};
@@ -65,6 +82,11 @@ int letterToPosition(char letterPlay)
     }
 }
 
+/**
+ * Name: positionToLetter
+ * Funtion: cambia el numero de columna a letras (a,b,c,d,e,f,g,h)
+ * return: (char) retorna el numero cambiado a letra
+*/
 char positionToLetter(int numberPosition)
 {
     char *letters = {"abcdefgh"};
@@ -77,13 +99,16 @@ char positionToLetter(int numberPosition)
     }
 }
 
+/**
+ * Name: checkLastPositionEmpty
+ * Funtion: revisar si la ultima posicion a mover esta vacia
+ * return: (int) retorna 1 si lo esta y, 0 si no
+*/
 int checkLastPositionEmpty(char *lastPosition, char **board)
 {
     int row = abs((lastPosition[1] - '0') - 8), column = letterToPosition(lastPosition[0]) - 1;
-    printf("%c\n", board[row][column]);
     if (board[row][column] == '*')
     {
-        printf("Hello here\n");
         return 1;
     }
     return 0;

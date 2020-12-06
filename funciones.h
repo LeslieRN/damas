@@ -9,6 +9,7 @@
 #ifndef FUNCIONES_H_
 #define FUNCIONES_H_
 
+//Estructura player que guarda informacion relevante como: color, cantidad de piezas, cantidad de juegos...
 typedef struct
 {
     char name[100];
@@ -21,6 +22,7 @@ typedef struct
     char pawn;
 } player;
 
+//Estructura que guarda las posiciones blancas y negras del tablero
 typedef struct
 {
     int row;
@@ -28,20 +30,25 @@ typedef struct
     char value;
 } boardPositions;
 
+//Estructura que guarda el historial del juego
 typedef struct
 {
     char name[150];
-    char moves[500];
+    char moves[1000];
 } gameHistory;
 
+//funciones de tabla
 char **boardSpace();
 char **fillBoard(char **, player *);
 boardPositions *secondBoard();
 void displayBoard(char **);
 player *fillPlayerData();
-void showPositions(boardPositions *);
+//void showPositions(boardPositions *);
+
+//funcion del menu principal
 int mainMenu();
 
+//funciones de validacion y coordinadas
 int letterToPosition(char);
 char positionToLetter(int);
 void checkIfLegalMovement(char **, char **, boardPositions *, char **boardPlay, int, player *);
@@ -49,32 +56,29 @@ int checkOverflow(boardPositions *, char *);
 int coordinates(char *, char *, char **, int *, int *, player *);
 char *possibleMoves(char *, char **);
 char *possibleForceMove(int, player *, char **);
+
+//funcione de movimiento
 int move(int, int, char *, char *, char ***, player *);
-//void checkLastDiag(char *, char **);
-//int determineDiagonal(char *, char *);
+
+//funciones de validacion y forzar movimiento
 int checkLastPositionEmpty(char *, char **);
 int checkIfForceMove(int, player *, char *, char **);
 int checkIfPossibleMove(char *, char *, char **);
-//int checkIfCrox(char *, char *);
-//void forceMovement(char *, int, player *, char **);
-int isKing(char **, char *);
-int isPawn(char **, char *);
+int isKing(char);
 int askForTable();
-//char *checkDiagDown(char *, char **, int, int);
-//char *checkDiagUp(char *, char **, int, int);
-//int checkRightDown(char *, char **, int, int);
-//void showPossibleMoves(char **);
-void changePlayer(int *, int *);
+void changePlayer(int *);
 void returnMovement(char *, int, int);
-char changeNumbertoLetter(char);
+
+//funciones de jugador
+//char changeNumbertoLetter(char);
 int determineWinner(player **);
-//int chec
+
 /*FILE FUNCTIONS*/
 FILE *open_file(char *, char *);
 void close_file(FILE *);
 void show_file_data(char *);
 void show_history_data(char *);
-void printStruct(FILE *fout, player temp);
+//void printStruct(FILE *fout, player temp);
 int quantity_of_players(char *file_name);
 void insert_data(char *file_name, player *);
 void insert_Moves(char *file_name, gameHistory);
